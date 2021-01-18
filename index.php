@@ -1,6 +1,21 @@
 <?php
    require_once('dipendenti.php');
-   echo $impiegato1->to_string();
-   echo "<br>" . "Compenso:";
-   echo $impiegato1->calcola_compenso() . "€";
+
+   echo
+      $impiegato_1_salariato->to_string() .
+      "<br>" .
+       "Compenso:" .
+       $impiegato_1_salariato->calcola_compenso() .
+       "€" .
+       "<br>";
+
+   echo
+      "<br>" .
+      $impiegato_1_ore->to_string() .
+      "<br>" .
+      "Compenso:" .
+      $impiegato_1_ore->calcola_compenso() .
+      "€" .
+      "<br>";
+
 ?>
