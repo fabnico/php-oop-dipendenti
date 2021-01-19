@@ -36,6 +36,9 @@ class ImpiegatoSalariato extends Impiegato{
    public $giorni_lavorati;
 
    public function __construct($nome, $cognome, $codice_fiscale, $codice_impiegato, $giorni_lavorati, $compenso_giornaliero){
+      if ($giorni_lavorati < 1){
+         throw new Exception("Deve essere presente almeno un giorno lavorato");
+      }
       parent::__construct($nome, $cognome, $codice_fiscale, $codice_impiegato, $compenso_giornaliero);
       $this->giorni_lavorati = $giorni_lavorati;
    }
@@ -73,6 +76,10 @@ class ImpiegatoSuCommissione extends Impiegato{
       return $this->commissione;
    }
 
+   public function to_string(){
+      return "Nome: " . $this->nome . "<br>" . " Cognome: " . $this->cognome . "<br>" . "Codice Fiscale: " .  $this->codice_fiscale . "<br>" . "Identificativo: " . $this->codice_impiegato . $this->nome_progetto . $this->commissione;
+   }
+
 }
 
 trait Progetto{
@@ -80,9 +87,6 @@ trait Progetto{
    public $nome_progetto;
    public $commissione;
 }
-
-$impiegato_1_salariato = new ImpiegatoSalariato('Fabrizio','Nicolosi','NCLFRZ01E01E000E',1,20,85);
-$impiegato_1_ore = new ImpiegatoAOre('Tizio','de Tizi','TZZDTZZ01E01E000E',2,150,12);
 
 
 ?>
