@@ -23,7 +23,7 @@ class Impiegato extends Persona{
    }
 
    public function to_string(){
-      return "Nome: " . $this->nome . "<br>" . " Cognome: " . $this->cognome . "<br>" . "Codice Fiscale: " .  $this->codice_fiscale . "<br>" . "Identificativo: " . $this->codice_impiegato ;
+      return "Nome: " . $this->nome . "<br>" . " Cognome: " . $this->cognome . "<br>" . "Codice Fiscale: " .  $this->codice_fiscale . "<br>" . "Identificativo: " . $this->codice_impiegato;
    }
 
    public function calcola_compenso(){
@@ -65,28 +65,35 @@ class ImpiegatoAOre extends Impiegato{
 
 }
 
-class ImpiegatoSuCommissione extends Impiegato{
-   use Progetto;
-
-   public function __construct($nome, $cognome, $codice_fiscale, $codice_impiegato, $nome_progetto, $commissione){
-      parent::__construct($nome, $cognome, $codice_fiscale, $codice_impiegato, $commissione );
-   }
-
-   public function calcola_compenso(){
-      return $this->commissione;
-   }
-
-   public function to_string(){
-      return "Nome: " . $this->nome . "<br>" . " Cognome: " . $this->cognome . "<br>" . "Codice Fiscale: " .  $this->codice_fiscale . "<br>" . "Identificativo: " . $this->codice_impiegato . $this->nome_progetto . $this->commissione;
-   }
-
-}
-
 trait Progetto{
 
    public $nome_progetto;
    public $commissione;
 }
 
+class ImpiegatoSuCommissione extends Impiegato{
+   use Progetto;
 
+   public function __construct($nome, $cognome, $codice_fiscale, $codice_impiegato, $nome_progetto, $commissione){
+      parent::__construct($nome, $cognome, $codice_fiscale, $codice_impiegato, $commissione );
+      $this->nome_progetto = $nome_progetto;
+      $this->commissione = $commissione;
+   }
+
+   public function calcola_compenso(){
+      echo $this->commissione;
+   }
+
+   public function to_string(){
+      echo parent::to_string();
+      echo "<br>" . "Nome progetto: " . $this->nome_progetto;
+      echo "<br>" . "Compenso: " . $this->commissione . "€";
+   }
+
+
+}
+
+
+$impiegato_1_commissione = new ImpiegatoSuCommissione('Tizio','Tizi','TZZTZZZ01E01E000E',2,"Boolean Project",2000);
+$impiegato_1_AOre = new ImpiegatoAOre('Caio','Decai','CAIDCA01E01E000E',3,100,12)
 ?>
